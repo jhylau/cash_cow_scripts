@@ -3,7 +3,7 @@ require 'rubygems'
 require 'oauth'
 require 'pry'
 require 'JSON'
-require 'ox'
+require 'active_support/all'
 
 # Your key/secrets for authentication
 CONSUMER_KEY        = ENV["CONSUMER_KEY"]
@@ -30,4 +30,4 @@ stocks = 'aapl,ibm'
 stock_info = @access_token.get("/v1/market/ext/quotes.xml?symbols=#{stocks}")
 
 # parse stock info
-data = Ox.parse(stock_info.body)
+hash = Hash.from_xml(stock_info.body)
